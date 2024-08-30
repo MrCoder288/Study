@@ -1,0 +1,101 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-container {
+    width: 450px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.upload-form {
+    width: 100%;
+}
+
+.file-drop-area {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    border: 2px dashed #555;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.fake-btn {
+    background-color: #444;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.file-msg {
+    font-size: 15px;
+    color: #aaa;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.speed-setter {
+    margin-bottom: 20px;
+}
+
+.speed-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box; /* Makes sure padding does not affect width */
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.upload-indicator img {
+    display: inline-block; /* Shows the indicator next to the message if needed */
+    vertical-align: middle;
+}
+
+
