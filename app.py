@@ -30,4 +30,4 @@ def display_text():
     return render_template('display.html', text=session.get('text', []).split(), speed=session.get('speed', 1))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8080)
