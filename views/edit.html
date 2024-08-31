@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Text</title>
+    <h1 style="position: absolute; top: 60px; left: 620px;"><b>EDIT PDF</b></h1>
+    <link rel="stylesheet" href="/styles/edit_styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the query parameters (text and speed)
+            const urlParams = new URLSearchParams(window.location.search);
+            const text = urlParams.get('text');
+            const speed = urlParams.get('speed');
+
+            // Populate the textarea with the extracted text
+            document.getElementById('edited_text').value = text;
+
+            // Set up form submission
+            document.getElementById('editForm').onsubmit = function(event) {
+                event.preventDefault();
+                const editedText = document.getElementById('edited_text').value;
+                window.location.href = `/display.html?text=${encodeURIComponent(editedText)}&speed=${speed}`;
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="edit-container">
+        <form id="editForm">
+            <textarea name="edited_text" id="edited_text" style="white-space: pre-wrap;"></textarea>
+            <button type="submit">Proceed to Display</button>
+        </form>
+    </div>
+</body>
+</html>

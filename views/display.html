@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Text</title>
+    <link rel="stylesheet" href="/styles/display_styles.css">
+    <script>
+        let words, speed, index = 0, paused = false, timeoutId;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const text = urlParams.get('text');
+            speed = parseInt(urlParams.get('speed')) || 300;
+
+            // Insert text into hidden div and start display
+            document.getElementById('wordsData').textContent = text;
+            words = text.split(' ');
+
+            startDisplay();
+        });
+
+        function startDisplay() {
+            index = 0; // Reset to the beginning
+            paused = false;
+            displayWord();
+        }
+
+        function displayWord() {
+            if (index < words.length && !paused) {
+                document.getElementById('wordDisplay').textContent = words[index++];
+                timeoutId = setTimeout(displayWord, 60000 / speed);  // Calculate delay based on words per minute
+            }
+        }
+
+        function pauseDisplay() {
+            paused = true;
+            clearTimeout(timeoutId);
+        }
+
+        function resumeDisplay() {
+            if (paused) {
+                paused = false;
+                displayWord();
+            }
+        }
+
+        function rewindDisplay() {
+            index = 0;  // Reset to the beginning
+            document.getElementById('wordDisplay').textContent = '';
+            clearTimeout(timeoutId);
+            startDisplay();
+        }
+
+        function goToUpload() {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <div id="wordDisplay" style="white-space: pre-wrap;"></div>
+    <div id="wordsData" style="display:none;"></div>
+
+    <div class="controls">
+        <button onclick="rewindDisplay()">Rewind to Start</button>
+        <button onclick="pauseDisplay()">Pause</button>
+        <button onclick="resumeDisplay()">Resume</button>
+        <button onclick="goToUpload()">Upload New File</button>
+    </div>
+</body>
+</html>

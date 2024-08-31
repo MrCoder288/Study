@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/scripts/upload.js"></script>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Upload PDF</h1>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="file-drop-area">
+                <span class="fake-btn">Choose File</span>
+                <span class="file-msg">Drag and drop your file here or click to upload</span>
+                <input id="fileInput" class="file-input" type="file" name="file" accept="application/pdf">
+                <div class="upload-indicator" style="visibility:hidden; margin-top: 10px;"></div>
+            </div>
+            <div class="speed-setter">
+                <input type="number" name="speed" min="1" max="1000" placeholder="Set Speed (WPM)" class="speed-input">
+            </div>
+            <button type="submit" class="submit-btn">Upload PDF</button>
+        </form>
+    </div>
+</body>
+</html>

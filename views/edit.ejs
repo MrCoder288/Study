@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Text</title>
+    <h1 style="position: absolute; top: 60px; left: 620px;"><b>EDIT PDF</b></h1>
+    <link rel="stylesheet" href="/styles/edit_styles.css">
+</head>
+<body>
+    <div class="edit-container">
+        <form action="/edit" method="post">
+            <!-- Display the text in a preformatted block -->
+            <textarea name="edited_text" id="edited_text" style="white-space: pre-wrap;"><%= text %></textarea>
+            <button type="submit">Proceed to Display</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Text</title>
+    <link rel="stylesheet" href="/styles/display_styles.css">
+    <script src="/scripts/display.js"></script>
+</head>
+<body>
+    <div id="wordDisplay"><pre><%= text %></pre></div>
+    <div id="wordsData" style="display:none;"><%= JSON.stringify(text) %></div>
+    <div id="speedData" style="display:none;"><%= speed %></div>
+    <div id="wordDisplay"></div>
+<div class="controls">
+    <button id="pauseButton">Pause</button>
+    <button id="rewindButton">Rewind</button>
+    <button id="uploadButton">Upload New File</button>
+    <input type="file" id="fileInput" accept=".txt,.pdf">
+</div>
+</body>
+</html>
