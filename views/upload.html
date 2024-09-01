@@ -4,24 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload File</title>
-    <link rel="stylesheet" href="/styles/style.css">
-    <script src="/scripts/upload.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-container {
+            width: 500px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .upload-form {
+            width: 100%;
+        }
+
+        .file-drop-area {
+            position: relative;
+            width: 90%;
+            margin: 0 auto 20px;
+            padding: 20px;
+            border: 2px dashed #555;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .fake-btn {
+            background-color: #444;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 3px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .file-msg {
+            font-size: 15px;
+            color: #aaa;
+        }
+
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        .speed-setter {
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .speed-input {
+            width: 60%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .upload-indicator {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 10px;
+            visibility: hidden; /* Hide initially */
+        }
+    </style>
 </head>
 <body>
     <div class="upload-container">
         <h1>Upload PDF</h1>
-        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <form id="uploadForm" class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <div class="file-drop-area">
                 <span class="fake-btn">Choose File</span>
                 <span class="file-msg">Drag and drop your file here or click to upload</span>
                 <input id="fileInput" class="file-input" type="file" name="file" accept="application/pdf">
-                <div class="upload-indicator" style="visibility:hidden; margin-top: 10px;"></div>
             </div>
             <div class="speed-setter">
-                <input type="number" name="speed" min="1" max="1000" placeholder="Set Speed (WPM)" class="speed-input">
+                <input class="speed-input" type="number" name="speed" min="1" max="1000" placeholder="Set Speed (WPM)">
             </div>
             <button type="submit" class="submit-btn">Upload PDF</button>
+            <div class="upload-indicator" id="uploadIndicator"></div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const fileMsg = document.querySelector('.file-msg');
+            const uploadIndicator = document.querySelector('.upload-indicator');
+
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length > 0) {
+                    const fileName = fileInput.files[0].name;
+                    fileMsg.textContent = `Selected file: ${fileName}`;
+                    uploadIndicator.style.visibility = 'hidden'; // Hide indicator until submission
+                } else {
+                    fileMsg.textContent = 'Drag and drop your file here or click to upload';
+                }
+            });
+
+            document.getElementById('uploadForm').onsubmit = function(event) {
+                if (fileInput.files.length > 0) {
+                    uploadIndicator.textContent = 'Uploading...';
+                    uploadIndicator.style.visibility = 'visible';
+
+                    // Allow the form to submit and show the success message after a slight delay
+                    setTimeout(() => {
+                        uploadIndicator.textContent = 'File uploaded successfully!';
+                    }, 1000); // Adjust this delay as needed
+                } else {
+                    event.preventDefault();
+                    alert('Please select a file to upload.');
+                }
+            };
+        });
+    </script>
 </body>
 </html>

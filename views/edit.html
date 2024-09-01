@@ -3,8 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Text</title>
-    <h1 style="position: absolute; top: 60px; left: 620px;"><b>EDIT PDF</b></h1>
-    <link rel="stylesheet" href="/styles/edit_styles.css">
+    <style>
+        body, html {
+            height: 1000px;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background similar to upload.html */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .edit-container {
+            width: 900px; /* Larger and more centered */
+            height: 600px;
+            background-color: #333;
+            padding: 40px; /* Adjusted padding for better edge spacing */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: right; /* Align text to the right */
+        }
+
+        textarea {
+            width: 900px;
+            height: 550px; /* Larger text area */
+            background-color: #444; /* Dark theme for text area */
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 10px 10px 10px; /* Even padding on all sides */
+            box-sizing: border-box; /* Include padding in width calculation */
+            font-size: 18px; /* Larger font size */
+            text-align: left; /* Text alignment within the textarea */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: bottom;
+            margin-top: 20px; /* Spacing between textarea and button */
+            transform: translateX(-180%);
+            /* transform: translateY(-90px); */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h1 {
+            position: absolute;
+            top: 60px;
+            left: 620px;
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Get the query parameters (text and speed)
@@ -25,6 +83,7 @@
     </script>
 </head>
 <body>
+    <h1><b>EDIT PDF</b></h1>
     <div class="edit-container">
         <form id="editForm">
             <textarea name="edited_text" id="edited_text" style="white-space: pre-wrap;"></textarea>

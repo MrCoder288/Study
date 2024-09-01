@@ -4,10 +4,25 @@ let words = [];
 let speed = 300;
 
 function cleanText(text) {
-    // Preserve paragraph breaks while removing excessive whitespace
-    return text.split(/\n{2,}/)  // Split into paragraphs
-               .map(paragraph => paragraph.replace(/\s+/g, ' ').trim())  // Clean each paragraph
-               .join('\n\n');  // Join paragraphs back with double newlines
+    return text.split(/\n{2,}/)
+               .map(paragraph => paragraph.replace(/\s+/g, ' ').trim())
+               .join('\n\n');
+}
+
+function updateWpmDisplay() {
+    document.getElementById('wpmDisplay').textContent = `WPM: ${speed}`;
+}
+
+function increaseWpm() {
+    speed += 1;
+    updateWpmDisplay();
+}
+
+function decreaseWpm() {
+    if (speed > 1) { // Prevent WPM from going below 1
+        speed -= 1;
+        updateWpmDisplay();
+    }
 }
 
 function startDisplay(text, newSpeed) {
@@ -16,6 +31,7 @@ function startDisplay(text, newSpeed) {
     speed = newSpeed || speed;
     const cleanedText = cleanText(text);
     words = cleanedText.split(/\s+/);
+    updateWpmDisplay();
     displayWord();
 }
 
@@ -23,7 +39,6 @@ function displayWord() {
     if (currentIndex < words.length && !isPaused) {
         let displayText = words[currentIndex++];
         
-        // Check if it's a paragraph break
         if (displayText === '') {
             displayText = '[Paragraph Break]';
         }
@@ -49,7 +64,6 @@ function rewind() {
 }
 
 function uploadNewFile() {
-    // Reset everything and redirect to the home page
     window.location.href = 'http://localhost:3000/upload.html';
 }
 
@@ -61,4 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('pauseButton').addEventListener('click', pauseResume);
     document.getElementById('rewindButton').addEventListener('click', rewind);
     document.getElementById('uploadButton').addEventListener('click', uploadNewFile);
+    document.getElementById('increaseWpmButton').addEventListener('click', increaseWpm);
+    document.getElementById('decreaseWpmButton').addEventListener('click', decreaseWpm);
 });
+

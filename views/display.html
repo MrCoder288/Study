@@ -3,7 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Display Text</title>
-    <link rel="stylesheet" href="/styles/display_styles.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #3a3a3a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #wordDisplay {
+            font-size: 50px;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 310px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #wpmDisplay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        #instructions {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ffffff;
+            text-align: center;
+        }
+    </style>
     <script>
         let words, speed, index = 0, paused = false, timeoutId;
 
@@ -17,8 +75,13 @@
             document.getElementById('wordsData').textContent = text;
             words = text.split(' ');
 
+            updateWpmDisplay();
             startDisplay();
         });
+
+        function updateWpmDisplay() {
+            document.getElementById('wpmDisplay').textContent = `WPM: ${speed}`;
+        }
 
         function startDisplay() {
             index = 0; // Reset to the beginning
@@ -55,9 +118,31 @@
         function goToUpload() {
             window.location.href = '/';
         }
+
+        function increaseWpm() {
+            speed += 10;
+            updateWpmDisplay();
+        }
+
+        function decreaseWpm() {
+            if (speed > 1) { // Prevent WPM from going below 1
+                speed -= 10;
+                updateWpmDisplay();
+            }
+        }
+
+        // Add event listener for keyboard input
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '=' || event.key === '+') {
+                increaseWpm();
+            } else if (event.key === '-') {
+                decreaseWpm();
+            }
+        });
     </script>
 </head>
 <body>
+    <div id="wpmDisplay">WPM: 300</div>
     <div id="wordDisplay" style="white-space: pre-wrap;"></div>
     <div id="wordsData" style="display:none;"></div>
 
@@ -66,6 +151,10 @@
         <button onclick="pauseDisplay()">Pause</button>
         <button onclick="resumeDisplay()">Resume</button>
         <button onclick="goToUpload()">Upload New File</button>
+    </div>
+
+    <div id="instructions">
+        Use + or - keys to slow or increase WPM
     </div>
 </body>
 </html>
