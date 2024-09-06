@@ -7,7 +7,6 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Set up multer to store files in memory
 const upload = multer({ storage: multer.memoryStorage() });
 app.use(express.static('public'));
 
